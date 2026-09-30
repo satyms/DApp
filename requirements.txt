@@ -1,0 +1,15 @@
+# System Requirements
+Node.js (v18.x or v20.x LTS recommended)
+npm (Node Package Manager)
+
+# Global Development Tools (Install via npm)
+truffle (v5.x.x or higher) -> npm install -g truffle
+ganache (CLI or GUI)      -> npm install -g ganache
+
+# Project Specific Dependencies (Install via npm in the 'client' folder)
+web3           # Ethereum JavaScript API
+lite-server    # Lightweight development node server
+jquery         # JavaScript library for DOM manipulation (optional but recommended for this build)
+
+# Smart Contract Compiler Requirements
+solc           # Solidity compiler (v0.8.19) - Handled automatically by Truffle based on truffle-config.js
