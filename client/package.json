@@ -1,0 +1,16 @@
+{
+  "name": "certverify-client",
+  "version": "1.0.0",
+  "description": "CertVerify DApp Frontend",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "lite-server",
+    "dev": "lite-server"
+  },
+  "dependencies": {
+    "web3": "^1.10.0"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
