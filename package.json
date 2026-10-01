@@ -1,0 +1,26 @@
+{
+  "name": "dapp",
+  "version": "1.0.0",
+  "description": "A blockchain-based Web3 application designed for educational and professional certificate issuance, verification, and revocation. Built as a Semester VII Bachelor in Computer Engineering / Technology (BCT) project, this DApp leverages Ethereum smart contracts to ensure certificate immutability, tamper resistance, and decentralized verification without reliance on a centralized database.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satyms/DApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/satyms/DApp/issues"
+  },
+  "homepage": "https://github.com/satyms/DApp#readme",
+  "devDependencies": {
+    "ganache": "^7.9.2"
+  }
+}

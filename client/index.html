@@ -3,80 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CertVerify — Blockchain Certificate Verification</title>
+  <title>CertVerify — Trustless Blockchain Credential Ledger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css" />
   <!-- Web3.js v1.10.0 -->
   <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
 </head>
 <body>
 
-  <header>
-    <h1>🔐 CertVerify</h1>
-    <p>Decentralized Certificate Verification on Ethereum</p>
-    <div id="account-info">Connected Account: <span id="current-account">Connecting to Ganache (port 7545)...</span></div>
-    <div id="contract-info">Contract Address: <span id="contract-address">Loading...</span></div>
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <span class="brand-badge">ETH LEDGER</span>
+        <h1>CertVerify</h1>
+        <p class="brand-subtitle">Immutable Academic & Professional Credential Verification</p>
+      </div>
+      
+      <div class="node-meta">
+        <div class="meta-item">
+          <span class="meta-label">Connected Wallet</span>
+          <span id="current-account" class="meta-value">Connecting to Ganache (7545)...</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Smart Contract</span>
+          <span id="contract-address" class="meta-value">Loading contract...</span>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <main>
+  <main class="app-layout">
 
     <!-- ═══════════════════════════════════════════════════════ -->
-    <!--  PANEL 1: ISSUER PANEL (Only authorized issuer)        -->
+    <!--  PANEL 1: VERIFIER HERO CONSOLE (Public Verification)   -->
     <!-- ═══════════════════════════════════════════════════════ -->
-    <section id="issuer-panel" class="panel">
-      <h2>📜 Issue Certificate</h2>
-      <p class="panel-desc">Record a tamper-proof certificate credential directly onto Ethereum.</p>
-      <form id="issue-form">
-        <label>Recipient Name:
-          <input type="text" id="recipient-name" placeholder="e.g. Alice Smith" required />
-        </label>
-        <label>Course Name:
-          <input type="text" id="course-name" placeholder="e.g. Blockchain & Smart Contracts" required />
-        </label>
-        <label>Grade / Distinction:
-          <input type="text" id="grade" placeholder="e.g. A+ / Distinction" required />
-        </label>
-        <label>Expiry Date:
-          <input type="date" id="expiry-date" required />
-        </label>
-        <button type="submit" id="issue-btn">Issue Certificate</button>
-      </form>
-      <div id="issue-result" class="result-box hidden"></div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════════ -->
-    <!--  PANEL 2: VERIFIER PANEL (Public - Anyone can verify)   -->
-    <!-- ═══════════════════════════════════════════════════════ -->
-    <section id="verifier-panel" class="panel">
-      <h2>🔍 Verify Certificate</h2>
-      <p class="panel-desc">Public, trustless verification using cryptographic Keccak-256 hash (0 Gas).</p>
-      <form id="verify-form">
-        <label>Certificate Hash:
-          <input type="text" id="cert-hash" placeholder="0x..." required />
-        </label>
-        <button type="submit" id="verify-btn">Verify Certificate</button>
+    <section id="verifier-panel" class="panel panel-hero">
+      <div class="panel-header">
+        <h2>Verify Credential Authenticity</h2>
+        <p class="panel-desc">Cryptographic zero-gas verification against the Ethereum ledger.</p>
+      </div>
+      <form id="verify-form" class="hero-form">
+        <div class="input-group">
+          <label for="cert-hash">Certificate Hash (32-byte Hex):</label>
+          <input type="text" id="cert-hash" placeholder="0x..." autocomplete="off" required />
+        </div>
+        <button type="submit" id="verify-btn" class="btn btn-primary">Verify Credential</button>
       </form>
       <div id="verify-result" class="result-box hidden"></div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════ -->
-    <!--  PANEL 3: REVOKE PANEL (Only authorized issuer)        -->
-    <!-- ═══════════════════════════════════════════════════════ -->
-    <section id="revoke-panel" class="panel">
-      <h2>❌ Revoke Certificate</h2>
-      <p class="panel-desc">Permanently invalidate a compromised or cancelled credential.</p>
-      <form id="revoke-form">
-        <label>Certificate Hash to Revoke:
-          <input type="text" id="revoke-hash" placeholder="0x..." required />
-        </label>
-        <button type="submit" id="revoke-btn">Revoke Certificate</button>
-      </form>
-      <div id="revoke-result" class="result-box hidden"></div>
-    </section>
+    <div class="grid-two-col">
+
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!--  PANEL 2: ISSUER PANEL (Authorized Authority)          -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section id="issuer-panel" class="panel">
+        <div class="panel-header">
+          <h2>Issue New Certificate</h2>
+          <p class="panel-desc">Mint a tamper-proof credential record directly onto the blockchain.</p>
+        </div>
+        <form id="issue-form">
+          <div class="input-group">
+            <label for="recipient-name">Recipient Name</label>
+            <input type="text" id="recipient-name" placeholder="e.g. Alice Smith" required />
+          </div>
+          <div class="input-group">
+            <label for="course-name">Course / Degree Title</label>
+            <input type="text" id="course-name" placeholder="e.g. B.Tech Computer Engineering" required />
+          </div>
+          <div class="input-row">
+            <div class="input-group">
+              <label for="grade">Grade / Score</label>
+              <input type="text" id="grade" placeholder="e.g. Distinction (4.0)" required />
+            </div>
+            <div class="input-group">
+              <label for="expiry-date">Expiry Date</label>
+              <input type="date" id="expiry-date" required />
+            </div>
+          </div>
+          <button type="submit" id="issue-btn" class="btn btn-accent">Issue Credential</button>
+        </form>
+        <div id="issue-result" class="result-box hidden"></div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!--  PANEL 3: REVOCATION CONSOLE (Authorized Issuer)       -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <section id="revoke-panel" class="panel panel-danger">
+        <div class="panel-header">
+          <h2>Revoke Credential</h2>
+          <p class="panel-desc">Permanently invalidate a compromised or obsolete certificate record.</p>
+        </div>
+        <form id="revoke-form">
+          <div class="input-group">
+            <label for="revoke-hash">Certificate Hash to Invalidate</label>
+            <input type="text" id="revoke-hash" placeholder="0x..." autocomplete="off" required />
+          </div>
+          <button type="submit" id="revoke-btn" class="btn btn-danger">Revoke Credential</button>
+        </form>
+        <div id="revoke-result" class="result-box hidden"></div>
+      </section>
+
+    </div>
 
   </main>
 
-  <footer>
-    <p>🎓 Semester VII BCT Project · Built with Solidity, Truffle, Ganache & Web3.js</p>
+  <footer class="app-footer">
+    <div class="footer-content">
+      <span>🎓 CertVerify DApp · Semester VII Blockchain Project</span>
+      <span class="tech-stack">Solidity · Truffle · Ganache · Web3.js</span>
+    </div>
   </footer>
 
   <script type="module" src="src/index.js"></script>
